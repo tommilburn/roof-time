@@ -1,0 +1,20 @@
+CREATE TABLE IF NOT EXISTS users (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    username TEXT UNIQUE NOT NULL,
+    phone TEXT UNIQUE NOT NULL,
+    active BOOLEAN NOT NULL DEFAULT 1
+);
+
+CREATE TABLE IF NOT EXISTS events (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    event_time DATETIME NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS user_events (
+    user_id INTEGER NOT NULL,
+    event_id INTEGER NOT NULL,
+    PRIMARY KEY (user_id, event_id),
+    FOREIGN KEY (user_id) REFERENCES users(id)
+    FOREIGN KEY (event_id) REFERENCES events(id)
+);
